@@ -1,0 +1,45 @@
+<div class="header">
+  <div class="title">
+    Cadastro de pessoas 4assets
+  </div>
+</div>
+
+<div class="table-people">
+  <div class="loading-people" *ngIf="loadPeople">
+    <span>Carregando...</span>
+  </div>
+
+  <table  *ngIf="!loadPeople">
+
+    <thead class="header">
+      <th class="name">Nome</th>
+      <th class="email">E-mail</th>
+      <th class="actions">
+        <button (click)="addPeople()" class="add-btn">
+          <i class="fas fa-plus"></i> Adicionar
+        </button>
+      </th>
+    </thead>
+
+    <div class="empty-people-list" *ngIf="peopleList.length == 0">
+      <span>Nenhuma Pessoa encontrada...</span>
+    </div>
+
+    <tbody *ngIf="peopleList.length > 0">
+      <tr *ngFor="let people of peopleList">
+        <td class="name" [title]="people.name">
+          <span>{{people.name}}</span>
+        </td>
+
+        <td class="email" [title]="people.email">
+          <span>{{people.email}}</span>
+        </td>
+
+        <td class="actions">
+          <i class="fas fa-edit" [title]="'editar'" (click)="editPeople(people)"></i>
+          <i class="fas fa-trash" [title]="'deletar'" (click)="deletePeople(people)"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

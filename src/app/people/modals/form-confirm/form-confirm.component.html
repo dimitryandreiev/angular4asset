@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Alerta</h4>
+</div>
+
+<div class="modal-body">
+    <div class="warning-modal">
+      Deseja mesmo apagar {{people.name}}
+    </div>
+</div>
+
+<div class="modal-footer">
+  <div class="actions-btn">
+    <button type="button"
+      class="cancel-btn"
+      [disabled]="deleteInProgress"
+      (click)="closeModal($event)"
+    >
+      Cancelar
+    </button>
+
+    <button type="button"
+      class="confirm-btn"
+      [disabled]="deleteInProgress"
+      (click)="confirmDelete($event)"
+    >
+      Confirmar
+    </button>
+  </div>
+</div>

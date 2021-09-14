@@ -1,0 +1,99 @@
+
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{title}}</h4>
+</div>
+<div class="modal-body">
+  <form #peopleForm="ngForm" autocomplete="off">
+    <div class="form-group">
+      <label for="name">Nome</label>
+      <span class="alert" *ngIf="name.errors?.required">
+        (Nome é obrigatório)
+      </span>
+
+      <input type="text"
+        id="name"
+        name="name"
+        class="form-control"
+        required minlength="4"
+        [ngModelOptions]="{standalone: true}"
+        class="form-control"
+        placeholder="Digite um nome"
+        [(ngModel)]="editPeople.name"
+        ngModel
+        #name="ngModel"
+      >
+
+
+    </div>
+
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <span class="alert" *ngIf="email.errors?.required">
+        (E-mail é obrigatório)
+      </span>
+      <span class="alert" *ngIf="email.errors?.pattern">
+        (E-mail deve estar no formato certo)
+      </span>
+
+      <input type="text"
+        id="email"
+        required
+        pattern="[^ @]*@[^ @]*"
+        [ngModelOptions]="{standalone: true}"
+        class="form-control"
+        placeholder="people@4assets.com"
+        [(ngModel)]="editPeople.email"
+        ngModel
+        #email="ngModel"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Telefone</label>
+      <input type="text"
+        id="phone"
+        [ngModelOptions]="{standalone: true}"
+        class="form-control"
+        placeholder="(99)9999 - 99999"
+        [(ngModel)]="editPeople.phone"
+        mask="(00)00000 - 0000"
+        [showMaskTyped]="true"
+        [dropSpecialCharacters]="false"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="birth_date">Data de nascimento</label>
+      <input type="text"
+        id="birth_date"
+        [ngModelOptions]="{standalone: true}"
+        class="form-control"
+        placeholder="dd/mm/yyyy"
+        [(ngModel)]="editPeople.birth_at"
+        mask="d0/M0/0000" [leadZeroDateTime]="true"
+        [showMaskTyped]="true"
+        [dropSpecialCharacters]="false"
+      >
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <div class="actions-btn">
+    <button type="button"
+      class="cancel-btn"
+      [disabled]="saveInProgress"
+      (click)="closeModal($event)"
+    >
+      Cancelar
+    </button>
+
+    <button type="submit"
+      form="peopleForm"
+      [disabled]="saveInProgress || name.errors?.required || email.errors?.required || email.errors?.pattern"
+      class="confirm-btn"
+      (click)="submitPeople($event)">
+      Salvar
+    </button>
+  </div>
+</div>
